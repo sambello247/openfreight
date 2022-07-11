@@ -1,0 +1,129 @@
+//Variable
+@import "../variables";
+
+
+
+#login-minimal{
+
+    img{
+        width: 100%;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    padding: 180px 0px;
+    background-color: $primary-color-1;
+    color: #fff;
+    width: 100%;
+    height: 100vh;
+
+    .box{
+        background-color: $default-color;
+        border-top: 6px solid $primary-color-7;
+        color: $primary-color-1;
+        padding: 25px 25px 0px 25px;
+        
+
+        input{
+            padding: 1.5rem 0.75rem !important;
+        }
+
+        input::placeholder {
+            color: #ced4da;
+            font-size: 1rem;
+            font-style: normal !important;
+        }
+
+
+        .control-group {
+            display: inline-block;
+            vertical-align: top;
+            background: #fff;
+            text-align: left;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 200px;
+            height: 210px;
+            margin: 10px;
+          }
+          .control {
+            display: block;
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            font-size: 18px;
+          }
+          .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+          }
+          .control__indicator {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            margin-top: 5px;
+            background: #e6e6e6;
+          }
+
+          .control--radio .control__indicator {
+            border-radius: 50%;
+          }
+          .control:hover input ~ .control__indicator,
+          .control input:focus ~ .control__indicator {
+            background: #ccc;
+          }
+          .control input:checked ~ .control__indicator {
+            background: $primary-color-1;
+          }
+          .control:hover input:not([disabled]):checked ~ .control__indicator,
+          .control input:checked:focus ~ .control__indicator {
+            background: $primary-color-1;
+          }
+          .control input:disabled ~ .control__indicator {
+            background: #e6e6e6;
+            opacity: 0.6;
+            pointer-events: none;
+          }
+          .control__indicator:after {
+            content: '';
+            position: absolute;
+            display: none;
+          }
+          .control input:checked ~ .control__indicator:after {
+            display: block;
+          }
+          .control--checkbox .control__indicator:after {
+            left: 8px;
+            top: 4px;
+            width: 3px;
+            height: 8px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+          .control--checkbox input:disabled ~ .control__indicator:after {
+            border-color: #7b7b7b;
+          }
+
+
+        
+        .btn{
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 0.9rem 0.75rem !important;
+            border: $primary-color-1;
+        }
+    }
+    .footer{
+        background: $primary-color-4;
+        color: $primary-color-1;
+        padding: 15px 25px 15px 25px;
+        font-size: 14px;
+        text-align: center;
+    }
+}
