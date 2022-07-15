@@ -26,7 +26,7 @@ class VehicleController extends Controller
     {
         //
 
-        $vehicles = Vehicle::paginate(2);
+        $vehicles = Vehicle::orderby('id', 'desc')->paginate(2);
         return view('multiauth::admin.vehicle')->with('vehicles', $vehicles);
     }
 
@@ -48,7 +48,39 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //Form Validation
+         $this->validate($request, [
+            'owner-name' => 'required',
+            'vehicle-brand' => 'required',
+            'vehicle-model' => 'required',
+            'vehicle-image' => 'required',
+            'fuel-type' => 'required',
+            'plate-number' => 'required',
+            'plate-expiry' => 'required',
+            'weight' => 'required',
+            'mileage' => 'required',
+            'last-inspection' => 'required',
+        ]);
+
+
+        $vehiclemodel = New Vehicle;
+
+        $vehiclemodel->owner_name = $request->input('owner-name');
+        $vehiclemodel->vehicle_brand = $request->input('vehicle-brand');
+        $vehiclemodel->vehicle_model = $request->input('vehicle-model');
+        $vehiclemodel->vehicle_image = $request->input('vehicle-image');
+        $vehiclemodel->fuel_type = $request->input('fuel-type');
+        $vehiclemodel->plate_number = $request->input('plate-number');
+        $vehiclemodel->plate_expiry = $request->input('plate-expiry');
+        $vehiclemodel->weight = $request->input('weight');
+        $vehiclemodel->mileage = $request->input('mileage');
+        $vehiclemodel->last_inspection = $request->input('last-inspection');
+
+        $vehiclemodel->save();
+
+        return redirect('/admin/vehicle');
+
+
     }
 
     /**

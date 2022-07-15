@@ -25,7 +25,7 @@ class DriverController extends Controller
     public function index()
     {
 
-        $drivers = Driver::paginate(2);	
+        $drivers = Driver::orderBy('id', 'DESC')->paginate(2);	
         return view('multiauth::admin.driver')->with('drivers', $drivers);
 
         // $drivers = Driver::find(2);
@@ -81,6 +81,7 @@ class DriverController extends Controller
  
         $drivermodel->save();
 
+        return redirect('/admin/driver');
     }
 
     /**

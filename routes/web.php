@@ -18,7 +18,11 @@ Route::GET('/admin/home', [App\Http\Controllers\Multiauth\DashboardController::c
 Route::GET('/admin/driver', [App\Http\Controllers\Multiauth\DriverController::class, 'index'])->name('admin.driver');   
 Route::GET('/admin/vehicle', [App\Http\Controllers\Multiauth\VehicleController::class, 'index'])->name('admin.vehicle');   
 Route::GET('/admin/shipping', [App\Http\Controllers\Multiauth\ShippingController::class, 'index'])->name('admin.shiping'); 
-Route::GET('/admin/users', [App\Http\Controllers\Multiauth\UserController::class, 'index'])->name('admin.users');  
+Route::GET('/admin/users', [App\Http\Controllers\Multiauth\UserController::class, 'index'])->name('admin.users'); 
+Route::POST('/driver', [App\Http\Controllers\Multiauth\DriverController::class, 'store'])->name('driver.store'); 
+Route::POST('/vehicle', [App\Http\Controllers\Multiauth\VehicleController::class, 'store'])->name('vehicle.store'); 
+Route::POST('/user', [App\Http\Controllers\Multiauth\UserController::class, 'store'])->name('user.store'); 
+
 
 
 

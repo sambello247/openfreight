@@ -17,20 +17,20 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('user_id');
-            $table->string('image');
-            $table->string('business_name');
+            $table->string('image')->nullable();
+            $table->string('business_name')->nullable();
             $table->string('address');
             $table->string('city');
             $table->string('state');
             $table->string('country');
             $table->string('postal');
-            $table->dateTime('dob');
+            $table->dateTime('dob')->nullable();
             $table->string('phone');
-            $table->string('facebook');
-            $table->string('linkedin');
-            $table->string('twitter');
-            $table->string('instagram');
-            $table->string('website');
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('website')->nullable();
         });
     }
 

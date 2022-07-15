@@ -16,7 +16,7 @@ class CreateDriversTable extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('type');
             $table->string('name');
             $table->string('phone');
@@ -26,7 +26,7 @@ class CreateDriversTable extends Migration
             $table->string('state');  
             $table->string('country');
             $table->string('postal');
-            $table->dateTime('dob');  
+            $table->dateTime('dob')->nullable();  
         });
     }
 

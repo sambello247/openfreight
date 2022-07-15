@@ -19,13 +19,13 @@ class CreateVehiclesTable extends Migration
             $table->string('owner_name');
             $table->string('vehicle_brand');
             $table->string('vehicle_model');
-            $table->string('vehicle_image');
-            $table->string('fuel_type');
+            $table->string('vehicle_image')->nullable();
+            $table->string('fuel_type')->nullable();
             $table->string('plate_number');
-            $table->dateTime('plate_expiry');
-            $table->string('weight');
-            $table->string('mileage');
-            $table->dateTime('last_inspection');
+            $table->dateTime('plate_expiry')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('mileage')->nullable();
+            $table->dateTime('last_inspection')->nullable();
         });
     }
 
