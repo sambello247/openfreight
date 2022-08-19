@@ -19,7 +19,8 @@ class UserController extends Controller
 
 
     public function __construct()
-    {
+    {   
+        //Middleware For Multi Authentication
         $this->middleware('auth:admin');
         $this->middleware('role:super', ['only'=>'show']);
         $this->adminModel = config('multiauth.models.admin');
@@ -28,14 +29,9 @@ class UserController extends Controller
 
     public function index()
     {
-        //
         
-        
-        // $users = User::find(1);
-        // $profiles = $users->profile;
-        // dd($profiles);
 
-        //Eloquent Join User table with profile and paginate.
+        //Paginate User With Profile
         $users = User::orderBy('id', 'desc')->with('profile')->paginate(2);
         return view('multiauth::admin.user')->with('users', $users);
     }
@@ -47,7 +43,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //Return View of Create-User
+        return view('multiauth::admin.create-user');
     }
 
     /**
@@ -58,18 +55,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
 
         //Form Validation
         $this->validate($request, [
             'first-name' => 'required',
             'last-name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'required',
             'image' => 'required',
             'account-type' => 'required',
             'account-status' => 'required',
-            'business-name' => 'required',
             'address' => 'required',
             'city' => 'required',
             'state' => 'required',
@@ -77,46 +73,47 @@ class UserController extends Controller
             'phone' => 'required',
             'postal' => 'required',
             'dob' => 'required',
-            'website' => 'required',
-            'facebook' => 'required',
-            'linkedin' => 'required',
-            'twitter' => 'required',
-            'instagram' => 'required',
         ]);
 
-        //Get the class of user model
-        $usermodel = new User;
+        //New User Model
+        $userModel = new User;
 
-        $usermodel->first_name = $request->input('first-name');
-        $usermodel->last_name = $request->input('last-name');
-        $usermodel->email = $request->input('email');
-        $usermodel->password = Hash::make($request->input('password'));
-        $usermodel->account_type = $request->input('account-type');
-        $usermodel->account_status = $request->input('account-status');
-        $usermodel->save();
+        //Append Form Requests to User Model Columns
+        $userModel->first_name = $request->input('first-name');
+        $userModel->last_name = $request->input('last-name');
+        $userModel->email = $request->input('email');
+        $userModel->password = Hash::make($request->input('password'));
+        $userModel->account_type = $request->input('account-type');
+        $userModel->account_status = $request->input('account-status');
 
-        //Get the class of profile model
-        $profilemodel = new Profile;
+        //New Profile Model
+        $profileModel = new Profile;
 
-        $profilemodel->image = $request->input('image');
-        $profilemodel->business_name = $request->input('business-name');
-        $profilemodel->address = $request->input('address');
-        $profilemodel->city = $request->input('city');
-        $profilemodel->state = $request->input('state');
-        $profilemodel->country = $request->input('country');
-        $profilemodel->phone = $request->input('phone');
-        $profilemodel->postal = $request->input('postal');
-        $profilemodel->dob = $request->input('dob');
-        $profilemodel->website = $request->input('website');
-        $profilemodel->facebook = $request->input('facebook');
-        $profilemodel->linkedin = $request->input('linkedin');
-        $profilemodel->twitter = $request->input('twitter');
-        $profilemodel->instagram = $request->input('instagram');
+        //Append Form Request to Profile Model Columns
+        $profileModel->image = $request->input('image');
+        $profileModel->business_name = $request->input('business-name');
+        $profileModel->address = $request->input('address');
+        $profileModel->city = $request->input('city');
+        $profileModel->state = $request->input('state');
+        $profileModel->country = $request->input('country');
+        $profileModel->phone = $request->input('phone');
+        $profileModel->postal = $request->input('postal');
+        $profileModel->dob = $request->input('dob');
+        $profileModel->website = $request->input('website');
+        $profileModel->facebook = $request->input('facebook');
+        $profileModel->linkedin = $request->input('linkedin');
+        $profileModel->twitter = $request->input('twitter');
+        $profileModel->instagram = $request->input('instagram');
 
-        //Save realated tables user and profile
-        $usermodel->profile()->save($profilemodel);
+        
+        //Save Into User Model
+        $userModel->save();
+        
+        //Save Into Related Model
+        $userModel->profile()->save($profileModel);
 
-        return redirect('/admin/users');
+
+        return redirect('/admin/users')->with('success','User has been successfully added');
 
 
 
@@ -141,7 +138,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find User Id
+        $user = User::find($id);
+        return view('multiauth::admin.update-user')->with('user', $user);
+
     }
 
     /**
@@ -153,7 +153,73 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Form Validation
+        $this->validate($request, [
+            'first-name' => 'required',
+            'last-name' => 'required',
+            // 'email' => 'required|unique:users,email',
+            'email' => 'required',
+            'password' => 'required',
+            'image' => 'required',
+            'account-type' => 'required',
+            'account-status' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'phone' => 'required',
+            'postal' => 'required',
+            'dob' => 'required',
+        ]);
+
+
+         //New User Model
+         $userModel = User::find($id);
+
+         //Append Form Requests to User Model Columns
+         $userModel->first_name = $request->input('first-name');
+         $userModel->last_name = $request->input('last-name');
+         $userModel->email = $request->input('email');
+         $userModel->password = Hash::make($request->input('password'));
+         $userModel->account_type = $request->input('account-type');
+         $userModel->account_status = $request->input('account-status');
+
+        
+ 
+         //New Profile Model
+         $profileModel = Profile::find($id);
+
+        //  dd($id);
+ 
+         //Append Form Request to Profile Model Columns
+         $profileModel->image = $request->input('image');
+         $profileModel->business_name = $request->input('business-name');
+         $profileModel->address = $request->input('address');
+         $profileModel->city = $request->input('city');
+         $profileModel->state = $request->input('state');
+         $profileModel->country = $request->input('country');
+         $profileModel->phone = $request->input('phone');
+         $profileModel->postal = $request->input('postal');
+         $profileModel->dob = $request->input('dob');
+         $profileModel->website = $request->input('website');
+         $profileModel->facebook = $request->input('facebook');
+         $profileModel->linkedin = $request->input('linkedin');
+         $profileModel->twitter = $request->input('twitter');
+         $profileModel->instagram = $request->input('instagram');
+ 
+
+         //Save Into User Model
+         $userModel->save();
+
+         //Save Into Related Model (Profile)
+         $userModel->profile()->save($profileModel);
+        
+         //Return Redirect With Success Message
+         return redirect('/admin/users')->with('success','User has been successfully updated');
+
+
+
+
     }
 
     /**
@@ -164,6 +230,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Find User Id
+        $user = User::find($id);
+
+        //Delete User
+        $user->delete();
+
+        //Return Redirect With Success Message.
+        return redirect('/admin/users')->with('success','User has been successfully removed');
     }
 }

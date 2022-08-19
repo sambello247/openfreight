@@ -16,6 +16,7 @@ class DriverController extends Controller
 
     public function __construct()
     {
+        //Midlleware for Multi Authentication
         $this->middleware('auth:admin');
         $this->middleware('role:super', ['only'=>'show']);
         $this->adminModel = config('multiauth.models.admin');
@@ -24,12 +25,10 @@ class DriverController extends Controller
     
     public function index()
     {
-
+        //Paginate Driver Order by ID DESC
         $drivers = Driver::orderBy('id', 'DESC')->paginate(2);	
         return view('multiauth::admin.driver')->with('drivers', $drivers);
 
-        // $drivers = Driver::find(2);
-        // dd($drivers);
     }
 
     /**
@@ -39,7 +38,8 @@ class DriverController extends Controller
      */
     public function create()
     {
-        //
+        //Return View For Create Driver 
+        return view('multiauth::admin.create-driver');
     }
 
     /**
@@ -65,23 +65,27 @@ class DriverController extends Controller
             'dob' => 'required',
         ]);
 
-        $drivermodel = new Driver;
+        //New Driver Model
+        $driverModel = new Driver;
 
-        $drivermodel->name = $request->input('full-name');
-        $drivermodel->image = $request->input('image');
-        $drivermodel->type = $request->input('type');
-        $drivermodel->address = $request->input('address');
-        $drivermodel->city = $request->input('city');
-        $drivermodel->state = $request->input('state');
-        $drivermodel->country = $request->input('country');
-        $drivermodel->phone = $request->input('phone');
-        $drivermodel->email = $request->input('email');
-        $drivermodel->postal = $request->input('postal');
-        $drivermodel->dob = $request->input('dob');
+        //Append Form Request To Driver Model
+        $driverModel->name = $request->input('full-name');
+        $driverModel->image = $request->input('image');
+        $driverModel->type = $request->input('type');
+        $driverModel->address = $request->input('address');
+        $driverModel->city = $request->input('city');
+        $driverModel->state = $request->input('state');
+        $driverModel->country = $request->input('country');
+        $driverModel->phone = $request->input('phone');
+        $driverModel->email = $request->input('email');
+        $driverModel->postal = $request->input('postal');
+        $driverModel->dob = $request->input('dob');
  
-        $drivermodel->save();
 
-        return redirect('/admin/driver');
+        //Save Into Driver Model
+        $driverModel->save();
+
+        return redirect('/admin/driver')->with('success','New driver has been successfully added.');
     }
 
     /**
@@ -103,7 +107,11 @@ class DriverController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find Driver ID
+        $driver = Driver::find($id);
+
+        //Return View With Driver ID
+        return view('multiauth::admin.update-driver')->with('driver', $driver);
     }
 
     /**
@@ -115,7 +123,41 @@ class DriverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Form Validation
+        $this->validate($request, [
+            'full-name' => 'required',
+            'image' => 'required',
+            'type' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'postal' => 'required',
+            'dob' => 'required',
+        ]);
+        
+        //Find Driver ID for Update
+        $driverModel = Driver::find($id);
+
+        //Append Form Request To Driver Model columns
+        $driverModel->name = $request->input('full-name');
+        $driverModel->image = $request->input('image');
+        $driverModel->type = $request->input('type');
+        $driverModel->address = $request->input('address');
+        $driverModel->city = $request->input('city');
+        $driverModel->state = $request->input('state');
+        $driverModel->country = $request->input('country');
+        $driverModel->phone = $request->input('phone');
+        $driverModel->email = $request->input('email');
+        $driverModel->postal = $request->input('postal');
+        $driverModel->dob = $request->input('dob');
+
+        //Save Into Driver Model
+        $driverModel->save();
+
+        return redirect('/admin/driver')->with('success','Driver successfully updated');
     }
 
     /**
@@ -126,6 +168,11 @@ class DriverController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Find Driver ID
+        $driver = Driver::find($id);
+
+        //Delete Driver
+        $driver->delete();
+        return redirect('/admin/driver')->with('success','Driver removed');
     }
 }

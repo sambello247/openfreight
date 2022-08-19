@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\MultiAuth;
+namespace App\Http\Controllers\multiauth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Driver;
-use App\Models\Vehicle;
-use App\Models\Package;
-use Active;
+use App\Models\Receiver;
 
-class DashboardController extends Controller
+class ReceiverController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,25 +22,11 @@ class DashboardController extends Controller
         $this->adminModel = config('multiauth.models.admin');
     }
 
-    
     public function index()
     {
-        
-        $driverCount = Driver::count();
-        $vehicleCount = Vehicle::count();
-
-
-        $packageValueSum = Package::sum('declared_value');
-
-        $activeUsercount = Active::users()->count();
-        $activeUsers = Active::users()->get();
-
-        $costSum = Package::sum('shipping_cost');
-        $saleCount = Package::count('shipping_cost');
-
-        return view('multiauth::admin.dashboard')->with('driverCount', $driverCount)->with('vehicleCount', $vehicleCount)
-        ->with('packageValueSum', $packageValueSum)->with('activeUsercount', $activeUsercount)->with('activeUsers',$activeUsers)
-        ->with('costSum', $costSum)->with('saleCount', $saleCount);
+        //Paginate Receiver Order by ID DESC
+        $receivers = Receiver::orderby('id', 'desc')->Paginate(2);
+        return view('multiauth::admin.receiver')->with('receivers', $receivers);
     }
 
     /**

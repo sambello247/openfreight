@@ -4,13 +4,9 @@ namespace App\Http\Controllers\MultiAuth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Driver;
-use App\Models\Vehicle;
-use App\Models\Package;
-use Active;
+use App\Models\Shipper;
 
-class DashboardController extends Controller
+class ShipperController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,22 +25,9 @@ class DashboardController extends Controller
     
     public function index()
     {
-        
-        $driverCount = Driver::count();
-        $vehicleCount = Vehicle::count();
-
-
-        $packageValueSum = Package::sum('declared_value');
-
-        $activeUsercount = Active::users()->count();
-        $activeUsers = Active::users()->get();
-
-        $costSum = Package::sum('shipping_cost');
-        $saleCount = Package::count('shipping_cost');
-
-        return view('multiauth::admin.dashboard')->with('driverCount', $driverCount)->with('vehicleCount', $vehicleCount)
-        ->with('packageValueSum', $packageValueSum)->with('activeUsercount', $activeUsercount)->with('activeUsers',$activeUsers)
-        ->with('costSum', $costSum)->with('saleCount', $saleCount);
+        //Paginate Shipper Order by ID DESC
+        $shippers = Shipper::orderby('id', 'desc')->Paginate(2);
+        return view('multiauth::admin.shipper')->with('shippers', $shippers);
     }
 
     /**

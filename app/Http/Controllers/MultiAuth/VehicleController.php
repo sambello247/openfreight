@@ -15,7 +15,8 @@ class VehicleController extends Controller
      */
 
     public function __construct()
-    {
+    {   
+        //Middleware for Multi Authentication
         $this->middleware('auth:admin');
         $this->middleware('role:super', ['only'=>'show']);
         $this->adminModel = config('multiauth.models.admin');
@@ -25,7 +26,7 @@ class VehicleController extends Controller
     public function index()
     {
         //
-
+        //Paginate Vehicle Orderby Id Desc
         $vehicles = Vehicle::orderby('id', 'desc')->paginate(2);
         return view('multiauth::admin.vehicle')->with('vehicles', $vehicles);
     }
@@ -37,7 +38,8 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        //Return View of Create-Vehicle
+        return view('multiauth::admin.create-vehicle');
     }
 
     /**
@@ -62,23 +64,26 @@ class VehicleController extends Controller
             'last-inspection' => 'required',
         ]);
 
+        //New Vehicle Model
+        $vehicleModel = New Vehicle;
 
-        $vehiclemodel = New Vehicle;
+        //Append Form Requests to Vehicle Model Columns
+        $vehicleModel->owner_name = $request->input('owner-name');
+        $vehicleModel->vehicle_brand = $request->input('vehicle-brand');
+        $vehicleModel->vehicle_model = $request->input('vehicle-model');
+        $vehicleModel->vehicle_image = $request->input('vehicle-image');
+        $vehicleModel->fuel_type = $request->input('fuel-type');
+        $vehicleModel->plate_number = $request->input('plate-number');
+        $vehicleModel->plate_expiry = $request->input('plate-expiry');
+        $vehicleModel->weight = $request->input('weight');
+        $vehicleModel->mileage = $request->input('mileage');
+        $vehicleModel->last_inspection = $request->input('last-inspection');
 
-        $vehiclemodel->owner_name = $request->input('owner-name');
-        $vehiclemodel->vehicle_brand = $request->input('vehicle-brand');
-        $vehiclemodel->vehicle_model = $request->input('vehicle-model');
-        $vehiclemodel->vehicle_image = $request->input('vehicle-image');
-        $vehiclemodel->fuel_type = $request->input('fuel-type');
-        $vehiclemodel->plate_number = $request->input('plate-number');
-        $vehiclemodel->plate_expiry = $request->input('plate-expiry');
-        $vehiclemodel->weight = $request->input('weight');
-        $vehiclemodel->mileage = $request->input('mileage');
-        $vehiclemodel->last_inspection = $request->input('last-inspection');
+        //Save Into Vehicle Model
+        $vehicleModel->save();
 
-        $vehiclemodel->save();
-
-        return redirect('/admin/vehicle');
+        //Return Redirect to Vehicle Page With Success Message
+        return redirect('/admin/vehicle')->with('success','New vehicle has been successfuly added');
 
 
     }
@@ -102,7 +107,11 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find Vehicle Id
+        $vehicle = Vehicle::find($id);
+
+        //Return View of Update-Vehicle With Vehicle data
+        return view('multiauth::admin.update-vehicle')->with('vehicle', $vehicle);
     }
 
     /**
@@ -114,7 +123,41 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         //Form Validation
+         $this->validate($request, [
+            'owner-name' => 'required',
+            'vehicle-brand' => 'required',
+            'vehicle-model' => 'required',
+            'vehicle-image' => 'required',
+            'fuel-type' => 'required',
+            'plate-number' => 'required',
+            'plate-expiry' => 'required',
+            'weight' => 'required',
+            'mileage' => 'required',
+            'last-inspection' => 'required',
+        ]);
+
+        //Find Vehicle Id For Update
+        $vehicleModel = Vehicle::find($id);
+
+        //Append Form Requests to Vehicle Model Columns
+        $vehicleModel->owner_name = $request->input('owner-name');
+        $vehicleModel->vehicle_brand = $request->input('vehicle-brand');
+        $vehicleModel->vehicle_model = $request->input('vehicle-model');
+        $vehicleModel->vehicle_image = $request->input('vehicle-image');
+        $vehicleModel->fuel_type = $request->input('fuel-type');
+        $vehicleModel->plate_number = $request->input('plate-number');
+        $vehicleModel->plate_expiry = $request->input('plate-expiry');
+        $vehicleModel->weight = $request->input('weight');
+        $vehicleModel->mileage = $request->input('mileage');
+        $vehicleModel->last_inspection = $request->input('last-inspection');
+
+        //Save Into Vehicle Model
+        $vehicleModel->save();
+
+        //Return Redirect to Vehicle Page With Success Message.
+        return redirect('/admin/vehicle')->with('success','Vehicle updated successully');
+
     }
 
     /**
@@ -125,6 +168,13 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+       //Find Vehicle Id
+       $vehicle = Vehicle::find($id);
+
+       //Delete Vehicle
+       $vehicle->delete();
+
+       //Return Redirect to Vehicle Page With Success Message
+       return redirect('/admin/vehicle')->with('success','Vehicle removed');
     }
 }
