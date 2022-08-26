@@ -155,6 +155,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Information
     - [ ] Driver Information
     - [ ] Vehicle Information
+    - [ ] Warehouse Information
 - [ ] Shipment
     - [ ] Origination
     - [ ] Destination
