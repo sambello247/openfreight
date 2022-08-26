@@ -18,7 +18,8 @@ Route::GET('/admin/home', [App\Http\Controllers\Multiauth\DashboardController::c
 Route::GET('/admin/driver', [App\Http\Controllers\Multiauth\DriverController::class, 'index'])->name('admin.driver');
 Route::GET('/admin/driver/create', [App\Http\Controllers\Multiauth\DriverController::class, 'create'])->name('admin.create-driver');   
 Route::GET('/admin/vehicle', [App\Http\Controllers\Multiauth\VehicleController::class, 'index'])->name('admin.vehicle');  
-Route::GET('/admin/vehicle/create', [App\Http\Controllers\Multiauth\VehicleController::class, 'create'])->name('admin.create-vehicle');   
+Route::GET('/admin/vehicle/create', [App\Http\Controllers\Multiauth\VehicleController::class, 'create'])->name('admin.create-vehicle');
+Route::GET('/admin/warehouse', [App\Http\Controllers\Multiauth\WarehouseController::class, 'index'])->name('admin.warehouse');     
 Route::GET('/admin/shipping', [App\Http\Controllers\Multiauth\ShippingController::class, 'index'])->name('admin.shiping'); 
 Route::GET('/admin/shipping/create', [App\Http\Controllers\Multiauth\ShippingController::class, 'create'])->name('admin.create-shiping'); 
 Route::GET('/admin/user/create', [App\Http\Controllers\Multiauth\UserController::class, 'create'])->name('admin.create-user'); 
