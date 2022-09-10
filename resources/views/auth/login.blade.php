@@ -7,7 +7,7 @@
         <div class="text-center mb-4">
           <a href="." class="navbar-brand navbar-brand-autodark"><img src="./img/of.png" alt=""></a>
         </div>
-        <form class="card card-md" action="{{ route('login') }}" autocomplete="off">
+        <form class="card card-md" method="POST" action="{{ route('admin.login') }}" autocomplete="off">
             @csrf
 
           <div class="card-body">
@@ -56,6 +56,7 @@
             </div>
             <div class="form-footer">
               <button type="submit" class="btn btn-primary w-100">Sign in</button>
+              
             </div>
           </div>
           <div class="hr-text">or</div>

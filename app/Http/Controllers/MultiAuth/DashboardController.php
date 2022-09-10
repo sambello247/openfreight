@@ -42,7 +42,7 @@ class DashboardController extends Controller
         $costSum = Package::sum('shipping_cost');
         $saleCount = Package::count('shipping_cost');
 
-        return view('multiauth::admin.dashboard')->with('driverCount', $driverCount)->with('vehicleCount', $vehicleCount)
+        return view('vendor/multiauth.dashboard')->with('driverCount', $driverCount)->with('vehicleCount', $vehicleCount)
         ->with('packageValueSum', $packageValueSum)->with('activeUsercount', $activeUsercount)->with('activeUsers',$activeUsers)
         ->with('costSum', $costSum)->with('saleCount', $saleCount);
     }

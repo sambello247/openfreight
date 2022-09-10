@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Muti-Authentication for Get route
+// Route::GET('/admin', [App\Http\Controllers\Multiauth\LoginController::class, 'index']);
 Route::GET('/admin/home', [App\Http\Controllers\Multiauth\DashboardController::class, 'index'])->name('admin.home');
 Route::GET('/admin/driver', [App\Http\Controllers\Multiauth\DriverController::class, 'index'])->name('admin.driver');
 Route::GET('/admin/driver/create', [App\Http\Controllers\Multiauth\DriverController::class, 'create'])->name('admin.create-driver');   

@@ -28,7 +28,7 @@ class VehicleController extends Controller
         //
         //Paginate Vehicle Orderby Id Desc
         $vehicles = Vehicle::orderby('id', 'desc')->paginate(2);
-        return view('multiauth::admin.vehicle')->with('vehicles', $vehicles);
+        return view('vendor/multiauth.vehicle')->with('vehicles', $vehicles);
     }
 
     /**
@@ -39,7 +39,7 @@ class VehicleController extends Controller
     public function create()
     {
         //Return View of Create-Vehicle
-        return view('multiauth::admin.create-vehicle');
+        return view('vendor/multiauth.create-vehicle');
     }
 
     /**
@@ -111,7 +111,7 @@ class VehicleController extends Controller
         $vehicle = Vehicle::find($id);
 
         //Return View of Update-Vehicle With Vehicle data
-        return view('multiauth::admin.update-vehicle')->with('vehicle', $vehicle);
+        return view('vendor/multiauth.update-vehicle')->with('vehicle', $vehicle);
     }
 
     /**

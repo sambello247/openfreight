@@ -19,7 +19,7 @@ class WarehouseController extends Controller
 
         $warehousing = Package::orderby('id', 'desc')->paginate(2);
 
-        return view('multiauth::admin.warehouse')->with('warehousing', $warehousing);
+        return view('vendor/multiauth.warehouse')->with('warehousing', $warehousing);
     }
 
     /**

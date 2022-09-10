@@ -27,7 +27,7 @@ class DriverController extends Controller
     {
         //Paginate Driver Order by ID DESC
         $drivers = Driver::orderBy('id', 'DESC')->paginate(2);	
-        return view('multiauth::admin.driver')->with('drivers', $drivers);
+        return view('vendor/multiauth.driver')->with('drivers', $drivers);
 
     }
 
@@ -39,7 +39,7 @@ class DriverController extends Controller
     public function create()
     {
         //Return View For Create Driver 
-        return view('multiauth::admin.create-driver');
+        return view('vendor/multiauth.create-driver');
     }
 
     /**
@@ -111,7 +111,7 @@ class DriverController extends Controller
         $driver = Driver::find($id);
 
         //Return View With Driver ID
-        return view('multiauth::admin.update-driver')->with('driver', $driver);
+        return view('vendor/multiauth.update-driver')->with('driver', $driver);
     }
 
     /**

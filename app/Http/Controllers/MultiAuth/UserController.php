@@ -33,7 +33,7 @@ class UserController extends Controller
 
         //Paginate User With Profile
         $users = User::orderBy('id', 'desc')->with('profile')->paginate(2);
-        return view('multiauth::admin.user')->with('users', $users);
+        return view('vendor/multiauth.user')->with('users', $users);
     }
 
     /**
@@ -44,7 +44,7 @@ class UserController extends Controller
     public function create()
     {
         //Return View of Create-User
-        return view('multiauth::admin.create-user');
+        return view('vendor/multiauth.create-user');
     }
 
     /**
@@ -140,7 +140,7 @@ class UserController extends Controller
     {
         //Find User Id
         $user = User::find($id);
-        return view('multiauth::admin.update-user')->with('user', $user);
+        return view('vendor/multiauth.update-user')->with('user', $user);
 
     }
 

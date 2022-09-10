@@ -32,7 +32,7 @@ class ShippingController extends Controller
         $packages = Package::orderBy('id', 'desc')->with('Shipper')->with('Receiver')->with('ServiceOption')->paginate(2);
         
         //Return View of "shipping" with packages
-        return view('multiauth::admin.shipping')->with('packages', $packages);
+        return view('vendor/multiauth.shipping')->with('packages', $packages);
     }
 
     /**
@@ -43,7 +43,7 @@ class ShippingController extends Controller
     public function create()
     {
         //Return View of "create-shipping"
-        return view('multiauth::admin.create-shipping');
+        return view('vendor/multiauth.create-shipping');
     }
 
     /**
@@ -203,7 +203,7 @@ class ShippingController extends Controller
     {
         //Find Package ID
         $package = Package::find($id);
-        return view('multiauth::admin.update-shipping')->with('package', $package);
+        return view('vendor/multiauth.update-shipping')->with('package', $package);
 
     }
 

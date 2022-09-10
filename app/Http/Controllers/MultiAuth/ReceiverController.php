@@ -26,7 +26,7 @@ class ReceiverController extends Controller
     {
         //Paginate Receiver Order by ID DESC
         $receivers = Receiver::orderby('id', 'desc')->Paginate(2);
-        return view('multiauth::admin.receiver')->with('receivers', $receivers);
+        return view('vendor/multiauth.receiver')->with('receivers', $receivers);
     }
 
     /**

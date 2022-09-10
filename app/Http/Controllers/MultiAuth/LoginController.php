@@ -4,30 +4,18 @@ namespace App\Http\Controllers\MultiAuth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Shipper;
 
-class ShipperController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-        //Midlleware for Multi Authentication
-        $this->middleware('auth:admin');
-        $this->middleware('role:super', ['only'=>'show']);
-        $this->adminModel = config('multiauth.models.admin');
-    }
-
-    
     public function index()
     {
-        //Paginate Shipper Order by ID DESC
-        $shippers = Shipper::orderby('id', 'desc')->Paginate(2);
-        return view('vendor/multiauth.shipper')->with('shippers', $shippers);
+        //
+        return view('multi-auth.login');
     }
 
     /**
