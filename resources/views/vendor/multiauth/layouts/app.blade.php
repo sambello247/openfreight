@@ -375,7 +375,7 @@
     <script src="{{ asset('libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('libs/jsvectormap/dist/js/jsvectormap.min.js') }}"></script>
     <script src="{{ asset('libs/jsvectormap/dist/maps/world.js') }}"></script>
-    <script src="{{ asset('libs/jsvectormap/dist/maps/world-merc.js') }}"></script>
+    {{-- <script src="{{ asset('libs/jsvectormap/dist/maps/world-merc.js') }}"></script> --}}
 	<script src="{{ asset('libs/list.js/dist/list.min.js') }}"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
@@ -661,7 +661,7 @@
       			}
       		},
       		zoomOnScroll: false,
-      		zoomButtons: false,
+      		zoomButtons: true,
       		// -------- Series --------
       		visualizeData: {
       			scale: ['#F8FAFC', '#206bc4'],
@@ -673,6 +673,7 @@
       	});
       });
       // @formatter:off
+	  
     </script>
     <script>
       // @formatter:off

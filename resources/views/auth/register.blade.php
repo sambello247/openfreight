@@ -12,8 +12,21 @@
         <div class="card-body">
           <h2 class="card-title text-center mb-4">Create new account</h2>
           <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Enter name" autofocus>
+            <label class="form-label">First Name</label>
+            <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" autocomplete="name" placeholder="Enter First Name" autofocus>
+
+            @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" autocomplete="lastname" placeholder="Enter Last Name" autofocus>
 
             @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -26,7 +39,7 @@
 
           <div class="mb-3">
             <label class="form-label">Email address</label>
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter email">
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" placeholder="Enter email">
 
             @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -40,7 +53,7 @@
           <div class="mb-3">
             <label class="form-label">Password</label>
             <div class="input-group input-group-flat">
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Password">
 
               <span class="input-group-text">
                 <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
@@ -60,7 +73,7 @@
           <div class="mb-3">
             <label class="form-label">Confirm Password</label>
             <div class="input-group input-group-flat">
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Re-Password">
+              <input id="password_confirmation" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation"  placeholder="Re-Password">
 
               <span class="input-group-text">
                 <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->

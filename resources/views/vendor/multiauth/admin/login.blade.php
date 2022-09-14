@@ -1,4 +1,4 @@
-@extends('layouts.multi-auth') 
+@extends('vendor/multiauth/layouts.auth')
 @section('content')
 <div class="page page-center">
     <div class="container-tight py-4">

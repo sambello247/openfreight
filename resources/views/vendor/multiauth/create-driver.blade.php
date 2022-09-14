@@ -1,4 +1,4 @@
-@extends('layouts.multi-app')
+@extends('vendor/multiauth/layouts.app')
 @section('content')
 <div class="container-xl">
     <!-- Page title -->

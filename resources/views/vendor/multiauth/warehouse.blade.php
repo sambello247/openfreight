@@ -36,59 +36,63 @@
 
          
         </div>
+
+        @if ($warehousing->count()==0)
+        <div class="col-md-12"><h3>Sorry! No record found in Warehouse.</h3></div>
+        @else
         
-        <div class="card">
-          <div class="card-body">
-            <div id="table-default">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th><button class="table-sort" data-sort="sort-name">Shipping Code</button></th>
-                      <th><button class="table-sort" data-sort="sort-type">Packaging</button></th>
-                      <th><button class="table-sort" data-sort="sort-name">Declared Value</button></th>
-                      <th><button class="table-sort" data-sort="sort-phone">Quantity</button></th>
-                      <th><button class="table-sort" data-sort="sort-email">Weight</button></th>
-                      <th><button class="table-sort" data-sort="sort-address">Weight Type</button></th>
-                      <th><button class="table-sort" data-sort="sort-city">Masurement</button></th>
-                      <th><button class="table-sort" data-sort="sort-state">Length</button></th>
-                      <th><button class="table-sort" data-sort="sort-country">Width</button></th>
-                      <th><button class="table-sort" data-sort="sort-quantity">Height</button></th>
-                      <th><button class="table-sort" data-sort="sort-date">Shipping Cost</button></th>
-                      <th></th>
-                      <th></th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody class="table-tbody">
+          <div class="card">
+            <div class="card-body">
+              <div id="table-default">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort" data-sort="sort-name">Shipping Code</button></th>
+                        <th><button class="table-sort" data-sort="sort-type">Packaging</button></th>
+                        <th><button class="table-sort" data-sort="sort-name">Declared Value</button></th>
+                        <th><button class="table-sort" data-sort="sort-phone">Quantity</button></th>
+                        <th><button class="table-sort" data-sort="sort-email">Weight</button></th>
+                        <th><button class="table-sort" data-sort="sort-address">Weight Type</button></th>
+                        <th><button class="table-sort" data-sort="sort-city">Masurement</button></th>
+                        <th><button class="table-sort" data-sort="sort-state">Length</button></th>
+                        <th><button class="table-sort" data-sort="sort-country">Width</button></th>
+                        <th><button class="table-sort" data-sort="sort-quantity">Height</button></th>
+                        <th><button class="table-sort" data-sort="sort-date">Shipping Cost</button></th>
+                        <th></th>
+                        <th></th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody">
 
-                    @foreach ($warehousing as $warehouse)
-                    <tr>
-                      <td class="sort-image">{{$warehouse->shipping_code}}</td>
-                      <td class="sort-type">{{$warehouse->packaging}}</td>
-                      <td class="sort-name">{{$warehouse->declared_value}}</td>
-                      <td class="sort-phone">{{$warehouse->qty}}</td>
-                      <td class="sort-email">{{$warehouse->weight}}</td>
-                      <td class="sort-address">{{$warehouse->weight_type}}</td>
-                      <td class="sort-city">{{$warehouse->measurement_in}}</td>
-                      <td class="sort-state">{{$warehouse->length}}</td>
-                      <td class="sort-country">{{$warehouse->width}}</td>
-                      <td class="sort-zip">{{$warehouse->height}}</td>
-                      <td class="sort-date">{{$warehouse->shipping_cost}}</td>
-                      
-                    </tr>
+                      @foreach ($warehousing as $warehouse)
+                      <tr>
+                        <td class="sort-image">{{$warehouse->shipping_code}}</td>
+                        <td class="sort-type">{{$warehouse->packaging}}</td>
+                        <td class="sort-name">{{$warehouse->declared_value}}</td>
+                        <td class="sort-phone">{{$warehouse->qty}}</td>
+                        <td class="sort-email">{{$warehouse->weight}}</td>
+                        <td class="sort-address">{{$warehouse->weight_type}}</td>
+                        <td class="sort-city">{{$warehouse->measurement_in}}</td>
+                        <td class="sort-state">{{$warehouse->length}}</td>
+                        <td class="sort-country">{{$warehouse->width}}</td>
+                        <td class="sort-zip">{{$warehouse->height}}</td>
+                        <td class="sort-date">{{$warehouse->shipping_cost}}</td>
+                        
+                      </tr>
 
-                    @endforeach
+                      @endforeach
 
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
         <div class="mt-3">{{ $warehousing->links() }}</div>
-        {{-- @endif --}}
+        @endif
       </div>
     </div>
       

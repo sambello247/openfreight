@@ -1,4 +1,4 @@
-@extends('multiauth::layouts.app')
+@extends('vendor/multiauth/layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

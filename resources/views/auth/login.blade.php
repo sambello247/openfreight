@@ -7,7 +7,7 @@
         <div class="text-center mb-4">
           <a href="." class="navbar-brand navbar-brand-autodark"><img src="./img/of.png" alt=""></a>
         </div>
-        <form class="card card-md" method="POST" action="{{ route('admin.login') }}" autocomplete="off">
+        <form class="card card-md" method="POST" action="{{ route('login') }}" autocomplete="off">
             @csrf
 
           <div class="card-body">
